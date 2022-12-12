@@ -1,0 +1,37 @@
+lov:
+    menu: "Listes de valeurs"
+    objet: "Autres listes"
+    civility: Civilité
+    gender: Genre
+    commerce: Commerce
+    livraison: Livraison
+    lieu: Lieu
+    statut: Statut
+    country: Pays
+    ville: Ville
+    commune: Commune
+    zone: Zone
+    quartier: Quartier
+    marque: Marque
+    typevoiture: Type de voiture
+    genrecommerce: Genre de commerce
+    typecommerce: Catégorie de commerce
+    typeproduit: Catégorie de produit
+    actions: 
+        add : Ajouter une valeur à la liste 
+        flash:
+            created: "Une LOV a été créée."
+            updated: "LOV a été mise à jour."
+            disable: "LOV désactivé."
+            enable: "LOV activé."
+    label: 
+        title: Titre
+        sort: Ordre
+        description: Description
+        keywords: Mots-clés  
+        createDate: Création
+        updateDate: Modification
+        revision: Révision
+        actions: Actions
+
+

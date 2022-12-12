@@ -1,0 +1,91 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'menu.document.titleView'|trans }}{% endblock %}
+
+{% block body %}
+	<!-- Fil d'ariane -->
+    <div class="cm-breadcrumb">{{ app_name }} > <span>{{ 'menu.document.titleView'|trans }}</span>
+    </div>
+
+    <!-- Titre -->
+    <div class="d-flex align-items-center lms-title">
+        <h1 class="text-uppercase lms-h1">{{ 'menu.document.titleView'|trans }}</h1>
+        <hr>
+    </div>
+
+    <!-- Contenu -->
+    <div class="d-flex flex-wrap">
+		<p class="lead"><h3><b>{{ 'document.user.title2' | trans}}</b></h3></p><br/>
+		{% if documents2 is defined and documents2 is not null and documents2 is not empty %}
+			<!-- Contenu BAM+ETE-->
+			<table class="table table-bordered table-striped" id="tablefiltre">
+				<thead class="thead-dark">
+					<tr>
+						<th>{{ 'document.title'|trans }}</th>
+						<th>{{ 'document.version'|trans }}</th>
+						<th>{{ 'document.action'|trans }}</th>
+					</tr>
+				</thead>      
+				<tbody>
+				{% for document in documents2 %}
+					<tr>
+						<td>
+							{{ document.title }}
+						</td>	
+						<td>
+							{{ document.version }}
+						</td>							
+						<td>
+							<a target="_blank" href="{{ path('admin_private_upload', {'upload': document.fileUri}) }}"><button type="button" class="btn waves-effect waves-light btn-sm btn-primary float">{{ 'document.actions.download' |trans | default('Cancel') }}</button></a>
+						</td>
+					</tr>
+				{% endfor %}   
+				</tbody>
+			</table>
+		{% else %}
+			<span class="text-danger">{{ 'document.actions.nodoc' |trans  }}</span>
+		{% endif %}
+	</div>
+	<br/>
+	<div class="d-flex flex-wrap">
+		<p class="lead"><h3><b>{{ 'document.user.title' | trans}}</b></h3></p><br/>
+		{% if documents is defined and documents is not null and documents is not empty %}
+			<!-- Contenu BAM-->
+			<table class="table table-bordered table-striped" id="tablefiltre">
+				<thead class="thead-dark">
+					<tr>
+						<th>{{ 'document.title'|trans }}</th>
+						<th>{{ 'document.version'|trans }}</th>
+						<th>{{ 'document.action'|trans }}</th>
+					</tr>
+				</thead>      
+				<tbody>
+				{% for document in documents %}
+					<tr>
+						<td>
+							{{ document.title }}
+						</td>	
+						<td>
+							{{ document.version }}
+						</td>							
+						<td>
+							<a target="_blank" href="{{ path('admin_private_upload', {'upload': document.fileUri}) }}"><button type="button" class="btn waves-effect waves-light btn-sm btn-primary float">{{ 'document.actions.download' |trans | default('Cancel') }}</button></a>
+						</td>
+					</tr>
+				{% endfor %}   
+				</tbody>
+			</table>
+		{% else %}
+			<span class="text-danger">{{ 'document.actions.nodoc' |trans  }}</span>
+		{% endif %}
+    </div>
+
+
+
+
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }}  
+    {{ encore_entry_script_tags('js/datatables') }}
+{% endblock %}

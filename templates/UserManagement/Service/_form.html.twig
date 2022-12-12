@@ -1,0 +1,16 @@
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{{ form_start(form) }}
+
+    {{ form_row(form.reference) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.organisation) }}
+
+    <div class="form-group">
+
+        <button type="submit" class="btn btn-primary">
+            {{ button_label|default('Save') }}
+        </button>
+
+    </div>
+{{ form_end(form) }}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New PurchaseItem{% endblock %}
+
+{% block body %}
+    <h1>Create new PurchaseItem</h1>
+
+    {{ include('transaction_management/purchase_item/_form.html.twig') }}
+
+    <a href="{{ path('transaction_management_purchase_item_index') }}">back to list</a>
+{% endblock %}

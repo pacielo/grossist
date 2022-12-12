@@ -1,0 +1,109 @@
+{% extends "admin_base.html.twig" %}
+
+{% block title %}{{ 'user.profile'|trans }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}  
+{% endblock %}
+
+{% block body %}
+<!-- Fil d'ariane -->
+<div class="cm-breadcrumb">{{ app_name }} > <span>{{ 'user.profile'|trans }}</span>
+</div>
+
+<!-- Titre -->
+<div class="d-flex align-items-center lms-title">
+    <h1 class="text-uppercase lms-h1">{{'user.profile'|trans}}</h1>
+    <hr>
+</div>
+
+<!-- Contenu -->
+<div>
+    <div class="align-items lms-login-bloc row">
+        {# <div class="row"> #}
+            <section class="col-lg-6 py-3 lms-login-form">
+                <header>
+                    <h1 class="font-weight-light">{{ user.civility }} {{ user.firstName }} {{ user.lastname }}</h1>
+                </header>
+                {% form_theme form 'bootstrap_4_layout.html.twig' %}
+                {{ form_start(form) }}
+                <div class="col-12">
+                    {{ form_errors(form) }}
+                    <div class="row">
+                        <div class="col-lg-6 py-3">
+                            {{ form_row(form.civility) }}
+                            {{ form_row(form.firstname) }}
+                            {{ form_row(form.lastname) }}
+                        </div>
+                        <div class="col py-3">
+                            {{ form_row(form.tel) }}
+                            <label>{{'user.email'|trans }}</label>
+                            <input type="text" class="form-control valid" value="{{user.email}}" aria-invalid="true" disabled>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 py-3">
+                            <label>{{'user.grossiste'|trans }}</label>
+                            <input type="text" class="form-control valid" value="{{user.grossiste}}" aria-invalid="true" disabled>
+                            {{ form_row(form.service) }}
+                            
+                        </div>
+                        <div class="col py-3">
+                        {{ form_row(form.rppsNumber) }}
+                        </div>
+                    </div>
+                    <div class="col-md-12"> 
+                        <div class="form-group text-center">
+                            <button type="submit" name="_submit" class="btn btn-primary">
+                                {{ 'global.submit'|trans }}
+                            </button>
+                        </div>    
+                    </div> 
+                    {{ form_end(form) }} 
+                </div> 
+            </section>
+            <section class="col-lg-4 py-3 mt">
+                <div class="jumbotron">
+                     <a href="{{ path('change_password')}}" class="btn btn-block btn-danger mt-4">
+                        <i class="material-icons lms-material-icons text-white">vpn_key </i>
+                        <small>{{ 'user.change_password'|trans }}</span></small>
+                    </a>
+                    <hr class="my-4">
+                    <p class="">{{'register.explaination2'|trans}}</p>
+                    <hr class="my-3">
+					{{ include('home/_cellule_relooke.html.twig') }}
+					<hr class="my-3">
+					{{ include('home/_information_medicale_relooke.htm.twig') }}
+                </div>
+            </section> 
+        {# </div>            #}
+    </div> 
+</div>    
+
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+    <script>
+        $(function(){   
+            $("form").validate({
+                rules: {
+                    "user[rppsNumber]": {
+                    required: true,
+                    minlength: 11,
+                    maxlength: 11,
+                    number: true
+                    }, 
+                },
+                submitHandler: function(form) {
+                        $(".spinner").show();
+                        form.submit();
+                },
+                error: function() {
+                        $(".spinner").hide();
+                }
+            });  
+        });
+    </script>  
+
+{% endblock %}

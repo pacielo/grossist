@@ -1,0 +1,41 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'menu.document.titlegestion'|trans }}{% endblock %}
+
+{% block body %}
+<!-- Fil d'ariane -->
+    <div class="cm-breadcrumb">{{ app_name }} > <span>{{ 'menu.document.titlegestion'|trans }}</span>
+    </div>
+
+    <!-- Titre -->
+    <div class="d-flex align-items-center lms-title">
+        <h1 class="text-uppercase lms-h1">{{ 'menu.document.titlegestion'|trans }}</h1>
+        <hr>
+    </div>
+	 <!-- Contenu -->
+    <div class="d-flex flex-wrap lms-dashboard">    
+		<div class="col-12">
+			{{ include('DocumentManagement/Document/_form.html.twig') }}	
+		</div>
+	</div>  
+
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }}
+    {{ encore_entry_script_tags('js/validator') }}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.fr.min.js" integrity="sha512-fx3aztaUjb4NyoD+Tso5g7R1l29bU3jnnTfNRKBiY9fdQOHzVhKJ10wEAgQ1zM/WXCzB9bnVryHD1M40775Tsw==" crossorigin="anonymous"></script>
+	<script>
+		$(document).ready(function() {
+			$('.pop-date').datepicker({
+				 {% if  app.request.get('_locale') == "fr" %}
+					language: 'fr',
+					format: "dd/mm/yyyy",
+				{% else %}
+					language: 'en',
+					format: "yyyy-mm-dd",
+				{% endif %}					
+			});
+		});
+	</script>
+{% endblock %}

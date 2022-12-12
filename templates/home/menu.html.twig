@@ -1,0 +1,93 @@
+<!-- Sidebar gauche -->
+<div id="headerMenuCollapse" class="d-flex position-sticky minify lms-container-nav {% if 'user_formation_module_organisation' in app.request.attributes.get('_route') %}minify{% endif %}">
+    <div class="pt-3 lms-menu">
+        <svg id="min-menu-btn" class="cm-menu-btn" xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24"> <path opacity=".87" fill="none" d="M24 0v24H0V0h24z" /> <path d="M14 7l-5 5 5 5V7z" /></svg>
+        <!-- Logo -->
+        <div class="d-flex justify-content-center align-items-center text-center mx-auto lms-logo-container">
+            <img src="{{asset('images/logo.png')}}" class="cm-logo-img" alt="logo"/>
+        </div>
+        <!-- Fin logo -->
+        <!-- Menu -->
+        <div class="cm-nav">
+            <ul id="myDropdown" class="nav nav-tabs border-0 flex-column">
+					        <li class="cm-nav-item {% if 'gerant_index' in app.request.attributes.get('_route') %}active{% endif %}">
+                    <a  href="" class="cm-nav-link">
+                      TEST</span>
+                    </a>
+                  </li>
+                  
+                <!-- ONGLET Accueil -->
+					     <li class="cm-nav-item {% if 'home_patient' in app.request.attributes.get('_route') %}active{% endif %}">
+                    <a  href="{{ path('transaction_management_category_index') }}" class="cm-nav-link">
+                      <i class="material-icons lms-material-icons"> home </i> <span>{{ 'menu.accueil.category' | trans }}</span>
+                    </a>
+                  </li>
+                  <li class="cm-nav-item {% if 'patient_' in app.request.attributes.get('_route') %}active{% endif %}">
+                    <a  href="{{ path('product_index') }}" class="cm-nav-link">
+                      <i class="material-icons lms-material-icons"> apps </i> <span>{{ 'menu.patient.produit' | trans }}</span>
+                    </a>
+                  </li>
+				          <li class="cm-nav-item ">
+                    <a  href="{{ path('transaction_management_purchase_index') }}" class="cm-nav-link">
+                      <i class="material-icons lms-material-icons"> query_stats </i> <span>{{ 'menu.prescripteur.purchase' | trans }}</span>
+                    </a>
+                  </li>
+                   <li class="cm-nav-item ">
+                    <a  href="{{ path('transaction_management_purchase_item_index') }}" class="cm-nav-link">
+                      <i class="material-icons lms-material-icons"> priority_high </i> <span>{{ 'menu.purchaseItem' | trans }}</span>
+                    </a>
+                  </li>
+					        <li class="cm-nav-item">
+                    <a  href="{{ path('transport_management_vehicule_index') }}" class="cm-nav-link">
+                      <i class="material-icons lms-material-icons"> priority_high </i> <span>{{ 'menu.vehicule' | trans }}</span>
+                    </a>
+                  </li>
+                 
+                  <li class="cm-nav-item">
+                    <a  href="{{ path('transaction_management_livraison_index') }}" class="cm-nav-link">
+                      <i class="material-icons lms-material-icons"> priority_high </i> <span>{{ 'menu.livraisons' | trans }}</span>
+                    </a>
+                  </li>
+                {# {% if is_granted('ROLE_ADMIN') %} #}
+                  <li class="cm-nav-item  {% if 'index_new' in app.request.attributes.get('_route') %}active{% endif %}">
+                    <a class="cm-nav-link" href="{{path('admin_users_index_new')}}">
+                      <i class="material-icons lms-material-icons"> group_add </i> <span>{{ 'menu.user.list_new' | trans }}</span>
+                    </a>
+                  </li>
+                  <li class="cm-nav-item  {% if 'prescripteur' in app.request.attributes.get('_route') %}active{% endif %}">
+                    <a class="cm-nav-link" href="{{path('admin_users_index_prescripteur')}}">
+                      <i class="material-icons lms-material-icons"> supervisor_account </i> <span>{{ 'menu.user.list_prescripteur' | trans }}</span>
+                    </a>
+                  </li>
+                  <li class="cm-nav-item  {% if 'other_roles' in app.request.attributes.get('_route') %}active{% endif %}">
+                    <a class="cm-nav-link" href="{{path('admin_users_index_other_roles')}}">
+                      <i class="material-icons lms-material-icons"> supervisor_account </i> <span>{{ 'menu.user.management' | trans }}</span>
+                    </a>
+                  </li>
+                  <li class="cm-nav-item  {% if 'document' in app.request.attributes.get('_route') %}active{% endif %}">
+                    <a class="cm-nav-link" href="{{ path('admin_document_index') }}">
+                      <i class="material-icons lms-material-icons"> folder </i> <span>{{ 'menu.document.titlegestion' | trans }}</span>
+                    </a>
+                  </li> 
+                  <li class="cm-nav-item  {% if 'admin_audit' in app.request.attributes.get('_route') %}active{% endif %}">
+                    <a class="cm-nav-link" href="{{ path('admin_audit_list') }}">
+                      <i class="material-icons lms-material-icons"> usb </i> <span>{{ 'menu.audit.title' | trans }}</span>
+                    </a>
+                  </li> 
+                  <li class="cm-nav-item  {% if 'tracking' in app.request.attributes.get('_route') %}active{% endif %}">
+                    <a class="cm-nav-link" href="{{path('admin_tracking_list')}}">
+                      <i class="material-icons lms-material-icons"> blur_linear </i> <span>{{ 'menu.tracking.title' | trans }}</span>
+                    </a>
+                  </li> 
+                  <li class="cm-nav-item  {% if 'lov' in app.request.attributes.get('_route') or 'admin_grossiste_' in app.request.attributes.get('_route') %}active{% endif %}">
+                    <a class="cm-nav-link" href="{{path('admin_lov_list')}}">
+                      <i class="material-icons lms-material-icons"> settings </i> <span>{{ 'menu.lov.title' | trans }}</span>
+                    </a>
+                  </li> 
+                
+            </ul>
+        </div>
+        <!-- Fin menu -->
+    </div>
+</div>
+<!-- Fin sidebar gauche -->

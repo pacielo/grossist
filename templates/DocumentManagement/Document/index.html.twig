@@ -1,0 +1,152 @@
+{% extends 'admin_base2.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="{{ asset('assets/vendors/select2/select2.min.css')}}">
+  <link rel="stylesheet" href="{{ asset('assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css')}}">
+    <style>
+        #tablefiltre_length, #tablefiltre_filter {display: inline-block; width: 50%;}
+    </style>
+{% endblock %}
+
+{% block nav %}
+  {% include "navfront.html.twig" %}
+{% endblock %}
+
+{% block body %}
+
+<div class="container-scroller"> 
+    <div class="container-fluid page-body-wrapper">
+      <!-- MENU -->
+        {% include "menu.html.twig" %}
+
+      <div class="main-panel">
+        <div class="content-wrapper">
+
+            <div class="row mt-3 ">
+              <div class="col-sm-12 card border-0 card-body   "> 
+                <div class="table-responsive"> 
+                  <h4 class="card-title">Liste des documents</h4>                             
+                            
+                  <table class="table table-bordered table-striped" id="tablefiltre">
+    								<thead class="thead-dark">
+    									<tr>
+    										<th>{{ 'document.title'|trans }}</th>					
+    										<th>{{ 'document.folder'|trans }}</th>
+    										<th>{{ 'document.version'|trans }}</th>
+    										<th>{{ 'document.action'|trans }}</th>
+    									</tr>
+    								</thead>      
+    								<tbody>  
+      								{% for document in documents %}
+      									<tr>
+      										<td>
+      											{{ document.title }}
+      										</td>	
+      										<td>
+      											{% if document.folder == 1 %}
+      												Relooke1
+      											{% elseif document.folder == 2 %}
+      												Relooke2
+      											{% else %}
+      												N/A
+      											{% endif %}
+      										</td>	
+      										<td>
+      											{{ document.version }}
+      										</td>							
+      										<td>	
+      											<a class="icon" target="_blank" href="{{ path('admin_private_upload', {'upload': document.fileUri}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'document.actions.view'|trans }}"><i class="icon-md mdi mdi-eye"></i></a>
+      											<a class="icon" href="{{ path('admin_document_edit', {'id': document.id}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'document.actions.edit'|trans }}"><i class="mdi mdi-pencil icon-md"></i></a>   			
+      											{% if document.isValid %}
+      												<a class="icon"  href="{{ path('admin_document_disable', {'id': document.id}) }}"  data-toggle="tooltip" data-placement="top" title="{{ 'document.actions.disable'|trans }}" ><i class="icon-md mdi mdi-toggle-switch"></i></a>  
+      											{% else %}
+      												<a class="icon" href="{{ path('admin_document_disable', {'id': document.id}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'document.actions.enable'|trans }}"><i class="icon-md mdi mdi-toggle-switch-off"></i></a>  
+      											{% endif %}
+      										</td>
+      									</tr>
+      								{% endfor %}                   
+    								</tbody>
+    							</table>
+    							<a href="{{ path('admin_document_new') }}" class="btn waves-effect waves-light btn-primary float">
+    								{{ 'document.actions.add'|trans }}
+    							</a> 
+
+                </div> 
+            </div> 
+
+          </div>
+        </div>
+
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+
+{% endblock %}
+{% block js %}
+    {{ parent() }}
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="{{asset('assets/vendors/typeahead.js/typeahead.bundle.min.js') }}"></script>
+  <script src="{{asset('assets/vendors/select2/select2.min.js') }}"></script>
+  <script src="{{asset('assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
+  <!-- End plugin js for this page -->
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="{{asset('assets/js/file-upload.js') }}"></script>
+  <script src="{{asset('assets/js/typeahead.js') }}"></script>
+  <script src="{{asset('assets/js/select2.js') }}"></script>
+  <!-- End custom js for this page-->
+
+    <script>
+        $(function () {
+             //=======================================table===========================================
+             $('#filtreForm th').each( function () {
+                var title = $(this).text();
+                $(this).html( '<input type="text" class="form-control" placeholder="{{"global.table.search"|trans}} '+title+'" />' );
+            } );
+
+            var table = $('#tablefiltre').DataTable({
+                colReorder: true,
+                responsive: false, 
+                ordering:  true, 
+                order: [[ 0, "asc" ]],
+                searching: true,
+                paging: true,
+                language: {
+                    decimal:        "",
+                    emptyTable:     "-",
+                    info: "[_START_/_END_]  <b>{{"global.table.total"|trans}} : </b>_TOTAL_",
+                    infoEmpty:      "0/0   [0]",
+                    infoFiltered:   "({{"global.table.filteredForm"|trans}} _MAX_ {{"global.table.entries"|trans}})",
+                    infoPostFix:    "",
+                    thousands:      " ",
+                    lengthMenu:     "<b>{{"global.table.Entries"|trans}}</b> _MENU_",
+                    loadingRecords: "{{"global.table.loadingRecords"|trans}}...",
+                    processing:     "{{"global.table.processing"|trans}}...",
+                    search:         "<b>{{"global.table.search"|trans}}</b>:",
+                    zeroRecords:    "{{"global.table.zeroRecords"|trans}}",
+                    paginate: {next:       ">>", previous:   "<<"},
+                    
+                },
+            });
+            
+            table.columns().eq( 0 ).each( function ( colIdx ) {
+                $( 'input', $('#filtreForm th')[colIdx] ).on( 'keyup change', function () {
+                    table
+                        .column( colIdx )
+                        .search( this.value )
+                        .draw();
+                } );
+            } );
+            //=======================================table end=========================================
+            
+        });
+
+    </script> 
+{% endblock %}
+
+

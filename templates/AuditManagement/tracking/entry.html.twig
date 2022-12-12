@@ -1,0 +1,79 @@
+{% import '@DHDoctrineAudit/Audit/helpers/bootstrap.html.twig' as bootstrap %}
+{% import 'AuditManagement/helpers/helper.html.twig' as helper %}
+
+<article class="timeline-entry">
+    <div class="timeline-entry-inner">
+        <time class="timeline-time">
+            <span>{{ entry.created_at|date('H:i:s') }}</span> <span>{{ entry.created_at|date('l d F Y') }}</span>
+        </time>
+
+        <div class="timeline-icon bg-{{ bootstrap.label_type(entry.type) }}">
+            {{ bootstrap.icon_type(entry.type) }}
+        </div>
+
+        <div class="timeline-label">
+                <table class="table table-hover layout-fixed table-sm mt-2 mb-0">
+                    <thead class="thead-light">
+                        <th width="30%">id correction</th>
+                        <th width="30%">id patient</th>
+                        <th width="30%">N° </th>
+                        <th width="30%">Formulaire</th>
+                        <th width="30%">correction le </th>
+                        <th width="30%">Signé le n</th>   
+                        <th width="30%">justif</th>   
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td width="30%">{{ correction.id }}</td>
+                            <td width="30%">{{ forminclus.patient2.id }}</td>
+                            <td width="30%">{{ forminclus.patient2.numAtuCohorte }}</td>
+                            <td width="30%">{{ entity_name[3] }}</td>
+                            <td width="30%">{{ correction.updateDate | date("d/m/Y") }}</td>
+                            <td width="30%">{{ correction.updateDate | date("d/m/Y") }}</td>   
+                            <td width="30%">{{ correction.fichier }}</td> 
+                          
+                        </tr>
+                    </tbody>
+                </table>
+
+                 <table class="table table-hover layout-fixed table-sm mt-2 mb-0">
+                    <thead class="thead-light">  
+                        <th width="30%">intitulé</th>
+                        <th width="30%">valeur initiale</th> 
+                        <th width="30%">valeur corrigée n</th> 
+                    </thead>
+                    <tbody>
+                                {% set diffs = entry.diffs|json_decode(true) %}
+                                {% for key, values in diffs %}
+                        <tr>
+                                <td width="30%">{{ ('p2form2.' ~ key) | trans }}</td>
+                                <td width="30%">
+                                    {% if values.old is defined %}
+                                        {% if values.old is null %}
+                                            {{ bootstrap.badge('null', 'secondary') }}
+                                        {% else %}
+                                            {{ bootstrap.text(helper.dump(values.old), 'danger') }}
+                                        {% endif %}
+                                    {% endif %}
+                                </td> 
+                                <td width="30%">
+                                {% if values.new is defined %}
+                                        {% if values.new is null %}
+                                            {{ bootstrap.badge('null', 'secondary') }}
+                                        {% else %}
+                                            {% if values.old is null %}
+                                                {{ bootstrap.text(helper.dump(values.new), 'primary') }}
+                                            {% else %}
+                                                {{ bootstrap.text(helper.dump(values.new), 'success') }}
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                          
+                        </tr>
+                                {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+    </div>
+</article>

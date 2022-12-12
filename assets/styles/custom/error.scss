@@ -1,0 +1,29 @@
+figure { 
+	width: 10rem;
+}
+
+.DialogBody { 
+	margin: 0;
+	padding: 10px;
+	text-align: left; 
+	border: 1px solid #ccc;
+	border-right: 1px solid #999;
+	border-bottom: 1px solid #999;
+	background-color: #fff;
+	text-align: center;
+    div {
+        text-align: center; 
+        width: 400px; 
+        margin: 0 auto;
+        p {
+        	color: red; 
+        	font-size: 1.0rem; 
+        	line-height: 20px;
+        }
+        a {
+        	p {
+        		color: #666;
+        	}
+        }
+    }	
+}

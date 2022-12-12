@@ -1,0 +1,23 @@
+global:
+    welcom:
+        sentence: Votre platefome de gestion
+        reseting_subit: Envoyer le mail
+        resseting_titel: Réinitialiser votre mot de passe
+        reset_psw: Réinitialiser son mot de passe
+        reset_psw1: Nouveau mot de passe
+        reset_psw1_label: Entrer votre nouveau mot de passe
+        reset_psw2: Répéter le mot de passe
+    doc: Espace documentaire
+    mailLog: Log mails
+    traking: Tracking
+    literal:
+        success: Succès
+        close: Fermer
+
+    desactiver: Désactiver
+    inactif: Désactivé
+    activer: Activer
+    actif: Activé
+    submit: Valider
+    edit: Modifier
+    send: Envoyer

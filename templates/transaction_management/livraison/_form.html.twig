@@ -1,0 +1,7 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    {% if type is defined and type is not null %}
+    	<button class="btn">{{ button_label|default('Save') }}</button>
+    {% endif %}
+    <button name="nouvelle" value="nouvelle" class="btn">{{ button_label|default('Sous commande') }}</button>
+{{ form_end(form) }}

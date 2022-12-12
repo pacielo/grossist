@@ -1,0 +1,36 @@
+<div class="table-responsive">
+    <table class="table table-bordered table-striped lms-table" id="tablefiltre">
+        <thead class="thead-dark">
+            <tr>
+                <th>{{'lov.label.title'|trans }}</th>
+                <th>{{'lov.label.sort'|trans }}</th>
+                <th>{{'lov.label.actions'|trans }}</th>
+            </tr>
+        </thead> 
+        <thead id="filtreForm">
+            <tr>
+                <th>{{'lov.label.title'|trans }}</th>
+                <th>{{'lov.label.sort'|trans }}</th>
+                <th>{{'lov.label.actions'|trans }}</th>
+            </tr>
+        </thead>     
+        <tbody>
+            {% for l in lov %}
+                <tr>
+                    <td class="lead text-left ">{{l["val"].title}}</td>
+                    <td class="lead text-left">{{l["val"].sort}}</td>
+                    <td class="text-left" data-order="{% if l["val"].isValid %}1{% else %}0{% endif %}">
+                        <a class="icon" href="{{ path('admin_lov_edit', {'entity': entity, 'id': l["val"].id }) }}" data-toggle="tooltip" data-placement="top" title="{{ 'patient.actions.edit'|trans }}">
+                            <i class="material-icons lms-material-icons "><i class="mdi mdi-pencil icon-md"></i></i>
+                        </a>
+                        {% if l["val"].isValid %}
+                            <a class="icon"  href="{{ path('admin_lov_disable', {'entity': entity, 'id': l["val"].id}) }}"  data-toggle="tooltip" data-placement="top" title="{{ 'global.desactiver'|trans }}" ><i class="icon-md mdi mdi-toggle-switch-off"></i></a> 
+                        {% else %}
+                            <a class="icon" href="{{ path('admin_lov_disable', {'entity': entity, 'id': l["val"].id}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'global.activer'|trans }}"><i class="icon-md mdi mdi-toggle-switch"></i></a>   
+                        {% endif %} 
+                    </td>
+                </tr>
+            {% endfor %}    
+        </tbody>
+    </table>
+</div>

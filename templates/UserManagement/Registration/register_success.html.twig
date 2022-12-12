@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ 'global.literal.success'|trans}} {% endblock %}
+
+{% block body %}
+    {{ include('UserManagement/_header.html.twig') }}
+        <div class="container">
+          <center><figure style="width: 10rem;"><img src="{{asset('images/core/logo_square.svg')}}" class="cm-logo-img" alt="logo"/></figure></center>
+          <div class="row align-items-center" style="height: 45vh;">
+              <div class="cm-registration-confirm">
+                <div class="alert-success alert-dismissable p-3" role="alert">
+                  {{ 'register.check_email'|trans({'%email%': user.email}) }}
+                </div>
+                <a href="{{ path('app_login') }}" class="btn btn-primary mt-3">{{ 'security.login.return'|trans }}</a>
+              </div>
+          </div>
+        </div> 
+{% endblock %}
+
+{% block footer %}
+    {{ include('home/footer.html.twig', {'class': 'fixed-bottom'}) }}
+{% endblock %}

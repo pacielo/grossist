@@ -1,0 +1,71 @@
+global:
+    welcom:
+        reseting_subit: Envoyer le mail
+        resseting_titel: Réinitialiser votre mot de passe
+        reset_psw: Réinitialiser son mot de passe
+        reset_psw1: Nouveau mot de passe
+        reset_psw1_label: Entrer votre nouveau mot de passe
+        reset_psw2: Répéter le mot de passe
+    doc: Espace documentaire
+    mailLog: Log mails
+    traking: Tracking
+    literal:
+        success: Succès
+        close: Fermer
+
+    desactiver: Désactiver
+    inactif: Désactivé
+    activer: Activer
+    actif: Activé
+    submit: Valider
+    edit: Modifier
+    send: Envoyer
+ 
+    table:
+        filteredForm: Filtré parmi
+        entries: Lignes à afficher
+        total: Total
+        Entries: Lignes
+        search: Rechercher
+        zeroRecords: Pas de résultats
+        processing: En cours
+        loadingRecords: Chargement
+        action: Actions     
+        column: Colonnes à afficher
+        excel: Export excel
+        csv: Export CSV
+        pdf: Export PDF
+        print: Imprimer
+        copie: Copier
+    
+
+    error404: Oups ! Il semble que la page que vous cherchez soit introuvable.
+    go_back: Retour à la page d'accueil.
+    back: Retour
+
+menu:    
+    accueil:
+        title: Accueil
+    document:
+        title: Espace documentaire
+        titleView: Espace documentaire
+        titlegestion: Gestion des documents
+    lov:
+        title: Collections
+    user:
+        title: Administration
+        list: Liste des utilisateurs
+        list_new: Liste des nouvelles inscriptions
+        list_gerant: Liste des gerants
+        management: Gestion des utilisateurs
+    audit:
+        title: Pistes d'audit
+    tracking: 
+        title: Tracking
+    gerant: 
+        title: Tableaux de bord
+    faq: 
+        title: Guide d'utilisation monothérapie
+        title2: Guide d'utilisation association
+
+  

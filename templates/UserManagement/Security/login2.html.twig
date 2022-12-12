@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'security.login.submit'|trans }}{% endblock %}
+
+{% block body %}
+    {{ include('UserManagement/_header.html.twig') }}       
+        <div class="container">
+            <center><figure style="width: 10rem;"><img src="{{asset('images/core/logo_square.svg')}}" class="cm-logo-img" alt="logo"/></figure></center>
+            <div class="row align-items-center">
+                <section class="col-lg-5 lms-login-form">
+                    <header>
+                        <h2 class="font-weight-light text-uppercase">{{'register.login_title'|trans}}</h2>
+                    </header>
+                    {{ include('UserManagement/Security/login_content.html.twig') }}
+                </section>
+                <section class="col-lg-7">
+                    <div class="jumbotron">
+                        <header>
+                            <h2 class="font-weight-light text-uppercase">{{'register.register_title'|trans}}</h2>
+                        </header>
+                        <p class="lead">{{'register.register_subtitle'|trans}}</p>
+                        <hr class="my-3">
+                        <p class="">{{'register.not_inscrit'|trans}}<br><a href="{{ path('register') }}" class="btn btn-primary">{{ 'layout.register'|trans }}</a></p>
+                        <hr class="my-3">
+                        {{ include('home/_cellule_relooke.html.twig') }}
+                        <hr class="my-3">
+                        {{ include('home/_information_medicale_relooke.htm.twig') }}
+                    </div>
+                </section>
+            </div>
+        </div>
+{% for flashMessage in app.session.flashbag.get('success') %}
+    <input type="hidden" class="flashbagSuccess" value="{{ flashMessage }}">   
+{% endfor %}          
+{% endblock %}
+
+{% block js %}
+    {{ encore_entry_script_tags('js/login') }}         	
+{% endblock %}

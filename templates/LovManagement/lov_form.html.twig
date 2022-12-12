@@ -1,0 +1,42 @@
+
+{{ form_errors(form) }}
+
+<div class="form_group">
+        {{ form_label(form.title, 'lov.label.title'|trans) }}
+        {{ form_widget(form.title, { 'attr': {'class': 'form-control'} }) }}
+</div>    
+<div class="form_group">    
+        {{ form_label(form.sort, 'lov.label.sort'|trans) }}
+        {{ form_widget(form.sort, { 'attr': {'class': 'form-control', 'type': 'number'} }) }}
+</div>  
+{% if entity == "Ville" %}
+	<div class="form_group">    
+        {{ form_label(form.country, 'lov.label.country'|trans) }}
+        {{ form_widget(form.country, { 'attr': {'class': 'form-control'} }) }}
+	</div> 
+{% endif %}
+{% if entity == "Commune" %}
+	<div class="form_group">    
+        {{ form_label(form.ville, 'lov.label.ville'|trans) }}
+        {{ form_widget(form.ville, { 'attr': {'class': 'form-control'} }) }}
+	</div> 
+{% endif %}
+{% if entity == "Zone" %}
+	<div class="form_group">    
+        {{ form_label(form.commune, 'lov.label.commune'|trans) }}
+        {{ form_widget(form.commune, { 'attr': {'class': 'form-control'} }) }}
+	</div> 
+{% endif %}
+{% if entity == "Quartier" %}
+	<div class="form_group">    
+        {{ form_label(form.zone, 'lov.label.zone'|trans) }}
+        {{ form_widget(form.zone, { 'attr': {'class': 'form-control'} }) }}
+	</div> 
+{% endif %}
+<div class="form_group mt-2">
+    <button type="submit" class="btn btn-primary">
+        {{ 'global.send'|trans }}
+    </button>
+</div>
+     
+{{ form_rest(form) }}

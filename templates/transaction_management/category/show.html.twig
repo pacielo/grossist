@@ -1,0 +1,57 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Edit Category{% endblock %}
+
+{% block body %}
+ <!-- Fil d'ariane -->
+<div class="cm-breadcrumb">
+    {{ app_name }} > <span class="bold">{{ 'menu.lov.title'|trans}}</span>
+</div>
+
+<!-- Titre -->
+<div class="d-flex align-items-center lms-title">
+    <h1 class="text-uppercase lms-h1">Category </h1>
+    <hr>
+</div>
+
+<!-- Contenu -->    
+<div class="card border-0">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-9">   
+                <div class="card full-xs">  
+                  
+ <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ category.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ category.title }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('transaction_management_category_index') }}">back to list</a>
+
+    <a href="{{ path('transaction_management_category_edit', {'id': category.id}) }}">edit</a>
+
+    {{ include('transaction_management/category/_delete_form.html.twig') }}
+    
+                </div>
+            </div>    
+        </div>
+    </div>
+</div>                            
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+    <script>
+    </script> 
+{% endblock %}
+
+
+

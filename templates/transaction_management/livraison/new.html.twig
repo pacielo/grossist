@@ -1,0 +1,128 @@
+{% extends 'admin_base2.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="{{ asset('assets/vendors/select2/select2.min.css')}}">
+  <link rel="stylesheet" href="{{ asset('assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css')}}">
+    <style>
+        #tablefiltre_length, #tablefiltre_filter {display: inline-block; width: 50%;}
+    </style>
+{% endblock %}
+
+{% block nav %}
+  {% include "navfront.html.twig" %}
+{% endblock %}
+
+{% block body %}
+
+<div class="container-scroller"> 
+    <!-- partial:partials/_navbar.html -->
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- MENU -->
+        {% include "menu.html.twig" %}
+      <!-- FIN MENU -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-sm-4 card mx-2">
+              <h4 class="card-title"> Créer une livrason </h4>
+              {{ include('transaction_management/livraison/_form.html.twig') }}
+            </div>
+            <div class="col-sm-4 card">
+              <h4 class="card-title">Transporteur disponible</h4>
+              <table class="table table-bordered table-striped lms-table" id="tablefiltre">
+                        <thead class="thead-dark">
+                            <tr>
+                                                <th>Id commance</th>
+                                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <thead id="filtreForm">
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Date</th>
+                                            </tr>
+                        </thead>
+                        <tbody> 
+                                                <tr>
+                                                    <td colspan="8">no records found</td>
+                                                </tr>
+                        </tbody>
+                    </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+{% endblock %}
+{% block js %}
+    {{ parent() }}
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="{{asset('assets/vendors/typeahead.js/typeahead.bundle.min.js') }}"></script>
+  <script src="{{asset('assets/vendors/select2/select2.min.js') }}"></script>
+  <script src="{{asset('assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
+  <!-- End plugin js for this page -->
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="{{asset('assets/js/file-upload.js') }}"></script>
+  <script src="{{asset('assets/js/typeahead.js') }}"></script>
+  <script src="{{asset('assets/js/select2.js') }}"></script>
+  <!-- End custom js for this page-->
+    <script>
+
+        $(function () {
+            // ======================================================================================
+            //=======================================table===========================================
+            // ======================================================================================
+            $('#filtreForm th').each( function () {
+                var title = $(this).text();
+                $(this).html( '<input type="text" class="form-control" placeholder="{{"global.table.search"|trans}} '+title+'" />' );
+            } );
+
+            var table = $('#tablefiltre').DataTable({
+                colReorder: true,
+                responsive: false, 
+                ordering:  true, 
+                order: [[ 0, "asc" ]],
+                searching: true,
+                paging: true,
+                language: {
+                    decimal:        "",
+                    emptyTable:     "-",
+                    info: "[_START_/_END_]  <b>{{"global.table.total"|trans}} : </b>_TOTAL_",
+                    infoEmpty:      "0/0   [0]",
+                    infoFiltered:   "({{"global.table.filteredForm"|trans}} _MAX_ {{"global.table.entries"|trans}})",
+                    infoPostFix:    "",
+                    thousands:      " ",
+                    lengthMenu:     "<b>{{"global.table.Entries"|trans}}</b> _MENU_",
+                    loadingRecords: "{{"global.table.loadingRecords"|trans}}...",
+                    processing:     "{{"global.table.processing"|trans}}...",
+                    search:         "<b>{{"global.table.search"|trans}}</b>:",
+                    zeroRecords:    "{{"global.table.zeroRecords"|trans}}",
+                    paginate: {next:       ">>", previous:   "<<"},
+                    
+                },
+            });
+            
+            table.columns().eq( 0 ).each( function ( colIdx ) {
+                $( 'input', $('#filtreForm th')[colIdx] ).on( 'keyup change', function () {
+                    table
+                        .column( colIdx )
+                        .search( this.value )
+                        .draw();
+                } );
+            } );
+                // ======================================================================================
+            //=======================================table end=========================================
+            // ======================================================================================
+        });
+
+    </script> 
+{% endblock %}
+    

@@ -1,0 +1,30 @@
+.lms {
+    &-patient {
+        &-form {
+            >div {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                margin: .5em 0;
+                >* {
+                    flex: 0 0 auto;
+                }
+                label.error {
+                    flex: 1 1 100%;
+                }
+            }
+            >div:not(:last-child) {
+                input,
+                select {
+                    border: 0.0625em solid $athens-gray;
+                    max-width: 30em;
+                    width: 50%;
+                }
+            }
+            .required {
+                font-style: italic;
+                margin-right: 1em;
+            }
+        }
+    }
+}

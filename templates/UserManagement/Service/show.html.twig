@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<title>Service</title>
+
+{% block body %}
+    <h1>Service</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ service.id }}</td>
+            </tr>
+            <tr>
+                <th>Reference</th>
+                <td>{{ service.reference }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ service.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ service.description }}</td>
+            </tr>
+            <tr>
+                <th>Keywords</th>
+                <td>{{ service.keywords }}</td>
+            </tr>
+            <tr>
+                <th>Sort</th>
+                <td>{{ service.sort }}</td>
+            </tr>
+            <tr>
+                <th>Conditional</th>
+                <td>{{ service.conditional }}</td>
+            </tr>
+            <tr>
+                <th>Revision</th>
+                <td>{{ service.revision }}</td>
+            </tr>
+            <tr>
+                <th>CreateDate</th>
+                <td>{{ service.createDate ? service.createDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdateDate</th>
+                <td>{{ service.updateDate ? service.updateDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>IsValid</th>
+                <td>{{ service.isValid ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>IsDeleted</th>
+                <td>{{ service.isDeleted ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_management_service_index') }}">back to list</a>
+
+    <a href="{{ path('user_management_service_edit', {'id': service.id}) }}">edit</a>
+
+    {{ include('user_management_service/_delete_form.html.twig') }}
+{% endblock %}

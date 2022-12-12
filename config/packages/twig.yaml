@@ -1,0 +1,12 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    globals: 
+      version_core: "relooke"
+      plateforme: Relooke
+      app_name: Relooke
+      base_url: "%env(BASE_URLS)%"
+      base_type: ""
+
+services:
+    Twig\Extension\StringLoaderExtension:
+        tags: ['twig.extension']

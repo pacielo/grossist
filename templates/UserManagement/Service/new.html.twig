@@ -1,0 +1,27 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'service.create'|trans }}{% endblock %}
+
+{% block body %}
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('admin_service_index') }}">
+                <i class="fas fa-grossiste-user text-danger"></i> 
+                    {{ 'services'|trans }}
+            </a>
+        </li>
+        <li class="nav-item active">
+            <span class="nav-link active">
+                <i class="fas fa-plus-square text-danger"></i> 
+                    {{ 'service.create' | trans }}
+            </span>
+        </li>
+    </ul>
+
+    <div class="card mb-3">
+        <div class="card-body">
+    		{{ include('UserManagement/Service/_form.html.twig', {'button_label': 'service.create'|trans}) }}
+        </div>
+    </div>
+
+{% endblock %}

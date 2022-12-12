@@ -1,0 +1,14 @@
+user:
+    profile: Profil
+    sign_out: Déconnexion
+    civility: Civilité
+    societe: Societé
+    prenom: Prénom
+    nom: Nom
+    phone: Téléphone
+    email: Email
+    typeCommerce: Type de commerce
+    genreCommerce: Genre de commerce
+    quartier: Quartier
+    commune: Commune
+    ville: Ville

@@ -1,0 +1,172 @@
+{% extends 'admin_base2.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="{{ asset('assets/vendors/select2/select2.min.css')}}">
+  <link rel="stylesheet" href="{{ asset('assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css')}}">
+    <style>
+        #tablefiltre_length, #tablefiltre_filter {display: inline-block; width: 50%;}
+    </style>
+{% endblock %}
+
+{% block nav %}
+  {# {% include "nav.html.twig" %} #}
+  {% include "navfront.html.twig" %}
+{% endblock %}
+
+{% block body %}
+
+<div class="container-scroller"> 
+    <!-- partial:partials/_navbar.html -->    
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- MENU -->
+        {% include "menu.html.twig" %}
+      <!-- FIN MENU -->
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-sm-12 col-lg-12 ">
+              <div class="home-tab">
+
+                <!-- MENU HORIZONTAL -->
+                <div class="d-sm-flex align-items-center justify-content-between border-bottom">
+                  <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link {% if entity == "GenreCommerce" %}active ps-0{% endif %}" id="home-tab" href="{{ path('admin_lov_list', {'entity': 'GenreCommerce' }) }}" role="tab" >{{ 'lov.genrecommerce'|trans }}</a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a class="nav-link {% if entity == "TypeCommerce" %}active ps-0{% endif %}" id="profile-tab"  href="{{ path('admin_lov_list', {'entity': 'TypeCommerce' }) }}">{{ 'lov.typecommerce'|trans }}</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {% if entity == "Category" %}active ps-0{% endif %}" id="contact-tab" href="{{ path('admin_lov_list', {'entity': 'Category' }) }}">{{ 'lov.typeproduit'|trans }}</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {% if entity == "Marque" %}active ps-0{% endif %}" id="more-tab" href="{{ path('admin_lov_list', {'entity': 'Marque' }) }}" >{{ 'lov.marque'|trans }}</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {% if entity == "TypeVoiture" %}active ps-0{% endif %}" id="more-tab" href="{{ path('admin_lov_list', {'entity': 'TypeVoiture' }) }}">{{ 'lov.typevoiture'|trans }} </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {% if entity == "Country" %}active ps-0{% endif %}" id="more-tab" href="{{ path('admin_lov_list', {'entity': 'Country' }) }}">{{ 'lov.country'|trans }}</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {% if entity == "Ville" %}active ps-0{% endif %}" id="more-tab" href="{{ path('admin_lov_list', {'entity': 'Ville' }) }}">{{ 'lov.ville'|trans }} </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {% if entity == "Commune" %}active ps-0{% endif %}" id="more-tab" href="{{ path('admin_lov_list', {'entity': 'Commune' }) }}">{{ 'lov.commune'|trans }}</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {% if entity == "Zone" %}active ps-0{% endif %}" id="more-tab" href="{{ path('admin_lov_list', {'entity': 'Zone' }) }}" >{{ 'lov.zone'|trans }}</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {% if entity == "Quartier" %}active ps-0{% endif %}" id="more-tab" href="{{ path('admin_lov_list', {'entity': 'Quartier' }) }}" >{{ 'lov.quartier'|trans }}</a>
+                    </li>
+                  </ul>
+                </div>
+                <!-- FIN MENU HORIZONTAL -->
+                <div class="row mt-3">
+                    <div class="col-md-9">   
+                        <div class="card full-xs">  
+                            <div class="card-body">
+                                {% if entity == "Category" %}
+                                  <form action="{{ path('transaction_management_category_new') }}" method="post">
+                                  {% include "transaction_management/category/_form.html.twig" %}
+                                {% else %}
+                                  <form action="{{ path('admin_lov_add', {'entity': entity })}}" method="post">
+                                  {% include "LovManagement/lov_form.html.twig" %} 
+                                {% endif %}
+                                </form> 
+                                <br/><br/>
+                                {% include "LovManagement/_list_lite.html.twig" %} 
+                            </div>   
+                        </div>
+                    </div>    
+                    <div class="col-md-3"> 
+                        {% include "LovManagement/lov_menu.html.twig" %} 
+                    </div>
+                </div>
+                </div> 
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+
+{% endblock %}
+{% block js %}
+    {{ parent() }}
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="{{asset('assets/vendors/typeahead.js/typeahead.bundle.min.js') }}"></script>
+  <script src="{{asset('assets/vendors/select2/select2.min.js') }}"></script>
+  <script src="{{asset('assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
+  <!-- End plugin js for this page -->
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="{{asset('assets/js/file-upload.js') }}"></script>
+  <script src="{{asset('assets/js/typeahead.js') }}"></script>
+  <script src="{{asset('assets/js/select2.js') }}"></script>
+  <!-- End custom js for this page-->
+
+    <script>
+        $(function () {
+             //=======================================table===========================================
+             $('#filtreForm th').each( function () {
+                var title = $(this).text();
+                $(this).html( '<input type="text" class="form-control" placeholder="{{"global.table.search"|trans}} '+title+'" />' );
+            } );
+
+            var table = $('#tablefiltre').DataTable({
+                colReorder: true,
+                responsive: false, 
+                ordering:  true, 
+                order: [[ 0, "asc" ]],
+                searching: true,
+                paging: true,
+                language: {
+                    decimal:        "",
+                    emptyTable:     "-",
+                    info: "[_START_/_END_]  <b>{{"global.table.total"|trans}} : </b>_TOTAL_",
+                    infoEmpty:      "0/0   [0]",
+                    infoFiltered:   "({{"global.table.filteredForm"|trans}} _MAX_ {{"global.table.entries"|trans}})",
+                    infoPostFix:    "",
+                    thousands:      " ",
+                    lengthMenu:     "<b>{{"global.table.Entries"|trans}}</b> _MENU_",
+                    loadingRecords: "{{"global.table.loadingRecords"|trans}}...",
+                    processing:     "{{"global.table.processing"|trans}}...",
+                    search:         "<b>{{"global.table.search"|trans}}</b>:",
+                    zeroRecords:    "{{"global.table.zeroRecords"|trans}}",
+                    paginate: {next:       ">>", previous:   "<<"},
+                    
+                },
+            });
+            
+            table.columns().eq( 0 ).each( function ( colIdx ) {
+                $( 'input', $('#filtreForm th')[colIdx] ).on( 'keyup change', function () {
+                    table
+                        .column( colIdx )
+                        .search( this.value )
+                        .draw();
+                } );
+            } );
+            //=======================================table end=========================================
+            
+        });
+
+    </script> 
+{% endblock %}
+
+
+

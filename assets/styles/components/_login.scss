@@ -1,0 +1,68 @@
+.lms {
+    &-login {
+        &-bloc {
+            height: 100vh;
+        }
+        &-form {
+            &-group {
+                position: relative;
+                .lms-material-icons {
+                    margin: 0 .5em;
+                    position: absolute;
+                    top: .25em;
+                    z-index: 1;
+                }
+            }
+            &-field {
+                border-bottom: 0.0625em solid $athens-gray;
+                input {
+                    border: none;
+                    padding-left: 2.5em;
+                }
+            }
+        }
+    }
+    &-registration {
+        &-form {
+            // display: flex;
+            // flex-wrap: wrap;
+            // max-width: 80%;
+            >div {
+                // margin: 0 0 1.5em;
+                // flex: 0 0 50%;
+                // >* {
+                //     flex: 0 0 auto;
+                // }
+                // label.error {
+                //     flex: 1 1 100%;
+                // }
+            }
+            >div {
+                input,
+                select {
+                    border: 0.0625em solid $athens-gray;
+                    // max-width: 30em;
+                    // width: 50%;
+                }
+            }
+            .required {
+                font-style: italic;
+                margin-right: 1em;
+            }
+            // &--cgu {
+            //     >div {
+            //         flex-direction: row;
+            //         justify-content: space-between;
+            //     }
+            // }
+            .help-text {
+                color: $gray-dark;
+                font-size: small;
+            }
+        }
+        &-confirm {
+            margin: auto;
+            max-width: 35em;
+        }
+    }
+}

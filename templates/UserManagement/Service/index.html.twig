@@ -1,0 +1,77 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'services'|trans }}{% endblock %}
+
+{% block body %}
+    <ul class="nav nav-tabs">
+        <li class="nav-item active">
+            <span class="nav-link active">
+                <i class="fas fa-grossiste-user text-danger"></i> 
+                    {{ 'services'|trans }}
+            </span>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('admin_service_new') }}">
+                <i class="fas fa-plus-square text-danger"></i> 
+                    {{ 'service.create' | trans }}
+            </a>
+        </li>
+    </ul>
+
+    <div class="card mb-3">
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table" style="background-color: #FFFFFF" id="datatable">
+                    <thead>
+                            <th>{{ 'label.title' | trans }}</th>
+                            <th class="hidden-sm">{{ 'label.reference' | trans }}</th>
+                            <th class="hidden-sm">{{ 'label.organisation' | trans }}</th>
+                            <th class="hidden-sm">{{ 'label.createDate' | trans }}</th>
+                            <th class="hidden-sm">{{ 'label.updateDate' | trans }}</th>
+                            <th class="hidden-sm">{{ 'label.revision' | trans }}</th>
+                            <th class="hidden-sm">{{ 'label.isValid' | trans }}</th>
+                            <th>{{ 'table.action' | trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for service in services %}
+                        <tr>
+                            <td>{{ service.title }}</td>
+                            <td class="hidden-sm">{{ service.reference }}</td>
+                            <td class="hidden-sm">{{ service.organisation }}</td>
+                            <td class="hidden-sm">{{ service.revision }}</td>
+                            <td class="hidden-sm">{{ service.createDate ? service.createDate|date('Y-m-d H:i:s') : '' }}</td>
+                            <td class="hidden-sm">{{ service.updateDate ? service.updateDate|date('Y-m-d H:i:s') : '' }}</td>
+                            <td class="hidden-sm">{{ service.isValid ? '<i class="fas fa-check text-success"></i>' : '<i class="fas fa-times text-danger"></i>' }}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a class="btn btn-sm btn-outline-primary" href="{{ path('admin_service_edit', {'id': service.id}) }}" data-toggle="tooltip" data-original-title="{{ 'action.edit' | trans }}"><i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                    &nbsp;
+                                    <form action="{{ url('admin_service_delete', {id: service.id}) }}" method="post" data-confirmation="true"
+                                        id="delete-form-{{ service.id }}">
+                                        <input type="hidden" name="token" value="{{ csrf_token('delete') }}"/>
+                                        <button data-toggle="tooltip" data-original-title="{{ 'action.delete' | trans }}" type="submit" class="btn btn-sm btn-danger"
+                                                onclick="if(confirm('{{ 'confirmation.delete_service' | trans }}')){ return true }else{ return false }">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                    &nbsp;
+                                    <a class="btn btn-sm btn-outline-primary" href="{{ path('admin_audit_show_entity_history', {'entity': 'App-Entity-UserManagement-Service', 'id': service.id}) }}" data-toggle="tooltip" data-original-title="{{ 'action.audit' | trans }}">
+                                        <i class="fas fa-code-branch"></i>
+                                    </a> 
+                                </div> 
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="13">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

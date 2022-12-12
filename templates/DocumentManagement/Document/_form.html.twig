@@ -1,0 +1,47 @@
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{{ form_start(form) }}
+<div class="row">
+    <div class="col-12 form-group">	
+		{{ form_label(form.title, 'document.title'|trans , {'label_attr': {'class': ''}}) }}
+        {{ form_widget(form.title, { 'attr': {'class': '', 'required': 'required', 'id': 'title'} }) }}
+        {{ form_errors(form.title) }}
+	</div>
+	<div class="col-12 form-group">	
+		{{ form_label(form.version, 'document.version'|trans , {'label_attr': {'class': ''}}) }}
+        {{ form_widget(form.version, { 'attr': {'class': '', 'required': 'required', 'id': 'version'} }) }}
+        {{ form_errors(form.version) }}
+	</div>
+	{% if document is defined and document is not null and document.fileUri is not null %}
+		{% set file = document.fileUri |split('.') %}
+		{% set ext = file[file|length-1] %}
+		<div class="col-12 form-group">	
+			<div class="col-form-label">
+				{{ 'document.actions.preview' |trans  }} 
+			</div>
+			<div class="col-12 form-group">
+				{% if ext == "pdf" or ext == "jpg" or ext == "txt" or ext =="jpeg" or ext == "png" or ext == "gif" or ext == "PDF" or ext == "JPG" or ext == "TXT" or ext =="JPEG" or ext == "PNG" or ext == "GIF" %}
+					<embed src="{{ path('admin_private_upload', {'upload': document.fileUri}) }}" width="100%" height="300px">
+				{% else %}
+					<span class="text-danger">{{ 'document.actions.nopreview' |trans  }} .{{ ext }}</span>
+					<a target="_blank" href="{{ path('admin_private_upload', {'upload': document.fileUri}) }}"><button type="button" class="btn waves-effect waves-light btn-sm btn-primary float">{{ 'document.actions.download' |trans | default('Cancel') }}</button></a>
+				{% endif %}
+			</div>	
+		</div>
+    {% endif %}
+	<div class="col-12 form-group">
+		{{ form_label(form.folder, 'document.folder'|trans , {'label_attr': {'class': ''}}) }}
+        {{ form_widget(form.folder, { 'attr': {'class': '', 'required': 'required', 'id': 'folder'} }) }}
+        {{ form_errors(form.folder) }}
+	</div>
+	<div class="col-12 form-group">
+		{{ form_label(form.file, 'document.file'|trans , {'label_attr': {'class': ''}}) }}
+        {{ form_widget(form.file, { 'attr': {'class': '', 'required': 'required', 'id': 'file'} }) }}
+        {{ form_errors(form.file) }}
+	</div>
+	<div class="col-12 form-group">
+		<button type="submit" class="btn waves-effect waves-light btn-primary float">{{ 'document.actions.save' |trans | default('Save') }}</button>
+		<a href="{{ path('admin_document_index') }}"><button type="button" class="btn waves-effect waves-light btn-primary float">{{ 'document.actions.cancel' |trans | default('Cancel') }}</button></a>
+	</div>
+</div>
+{{ form_end(form) }}

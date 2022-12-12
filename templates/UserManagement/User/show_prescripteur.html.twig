@@ -1,0 +1,95 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'user.profile'|trans }}{% endblock %}
+
+{% block body %}
+<!-- Fil d'ariane -->
+<div class="cm-breadcrumb">{{ app_name }} > <span>{{ 'user.profile'|trans }}</span>
+</div>
+
+<!-- Titre -->
+<div class="d-flex align-items-center lms-title">
+    <h1 class="text-uppercase lms-h1">{{ user.civility }} {{ user.firstName }} {{ user.lastname }}</h1>
+    <hr>
+</div>
+
+<!-- Contenu -->
+<div class="d-flex flex-wrap lms-dashboard">
+    <div class="col-12"> 
+        {% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+        {{ form_start(form) }}
+
+        <div class="card-body">   
+            {% for type, messages in app.flashes %}
+                {% for message in messages %}
+                <div class="alert alert-dismissible alert-danger mt-2" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    </button>
+                        {{ message|trans }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+             
+            {{ form_errors(form) }}
+             
+            <div class="row">
+                <div class="col-12"> 
+                    {{ form_row(form.civility) }}
+                </div>
+            </div>    
+            <div class="row">
+                <div class="col-12"> 
+                {{ form_row(form.firstname) }}
+                </div>
+            </div>    
+            <div class="row">
+                <div class="col-12"> 
+                {{ form_row(form.lastname) }}
+                </div>
+            </div>       
+            <div class="row">
+                <div class="col-12">       
+                    {{ form_row(form.service) }}
+                </div>
+            </div> 
+            <div class="row">
+                <div class="col-12">       
+                    {{ form_row(form.serviceC) }}
+                </div>
+            </div>    
+            <div class="row">
+                <div class="col-12">       
+                    {{ form_row(form.rppsNumber) }}
+                </div>
+            </div>    
+            <div class="row">
+                <div class="col-12">       
+                    {{ form_row(form.tel) }}
+                </div>
+            </div> 
+            <div class="row">
+                <div class="col-12">       
+                    {{ form_row(form.grossiste) }}
+                </div>
+            </div>  
+            <div class="row">
+                <div class="col-12">       
+                    {{ form_row(form.grossisteC) }}
+                </div>
+            </div>  
+            <div class="row">
+                <div class="col-12">       
+                    {{ form_row(form.email) }}
+                </div>
+            </div>                          
+        </div>     
+        {{ form_end(form) }}                   
+    </div>    
+</div>    
+
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'service.edit' | trans }}{% endblock %}
+
+{% block body %}
+
+    <div class="card mb-3">
+        <div class="card-header"><i class="fas fa-edit text-danger"></i> {{ 'service.edit' | trans }}</div>
+        	<div class="card-body">
+    			{{ include('UserManagement/Service/_form.html.twig', {'button_label': 'service.edit' | trans }) }}
+    		</div>
+    	</div> 
+    </div>
+
+{% endblock %}

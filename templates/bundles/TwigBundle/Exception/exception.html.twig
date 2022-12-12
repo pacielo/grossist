@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Exception {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('css/error') }}
+{% endblock %}
+
+{% block body %}
+    {{ include('UserManagement/_header.html.twig') }}   
+     <div class="container">
+        <center><figure><img src="{{asset('images/core/logo_square.svg')}}" class="cm-logo-img" alt="logo"/></figure></center>
+        <div class="row align-items-center justify-content-center">
+            <div class="jumbotron">
+                <div class="DialogBody">
+                    <div>
+                         <p>
+                           {{ 'global.error404'|trans }}
+                         </p>
+                         <a href="{{ path('home')}}">
+                            <p>
+                           {{ 'global.go_back'|trans }}
+                         </p></a>
+                    </div>
+                </div> 
+            </div>      
+        </div>        
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {{ include('home/footer.html.twig', {'style': 'position:absolute;bottom: 0;'}) }}
+{% endblock %}

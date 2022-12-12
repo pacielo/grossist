@@ -1,0 +1,90 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'title.edit_user' | trans }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>.select2-container .select2-selection--single {font-size: 1rem; height: 35px; padding-top: 0.1em; color: #495057;background-color: #fff; background-clip: padding-box; border: 1px solid #ced4da;border-radius: .25rem;}.required:after { content: " *";color: #F9354C;}</style>
+{% endblock %}
+
+{% block body %}
+
+   <!-- Contenu -->
+<div class="d-flex flex-wrap lms-dashboard">
+    <div class="col-12"> 
+        {% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+        {{ form_start(form) }}
+        <div class="card-body">   
+
+            {% for type, messages in app.flashes %}
+                {% for message in messages %}
+                <div class="alert alert-dismissible alert-danger mt-2" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    </button>
+                        {{ message|trans }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+             
+            <div class="col-12">
+                {{ form_errors(form) }}
+                <div class="row">
+                    <div class="col-lg-12 py-3">
+                        {{ form_row(form.civility) }}
+                        {{ form_row(form.firstname) }}
+                        {{ form_row(form.lastname) }}
+                        {{ form_row(form.tel) }}
+                    </div>
+                    <div class="col-lg-12 py-3">
+                        {{ form_row(form.email) }}
+                        {{ form_row(form.listOfRoles) }}
+                    </div>
+                </div>
+                <div class="col-md-12"> 
+                    <div class="form-group text-center">
+                        <button type="submit" name="_submit" class="btn btn-primary">
+                            {{ 'global.submit'|trans }}
+                        </button>
+                    </div>    
+                </div>                                      
+            </div>     
+        {{ form_end(form) }}                   
+    </div>    
+
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('.js-select2').select2(); 
+
+            $("form").validate({
+                rules: {
+                    "other_user[email][second]": {
+                        required: true,
+                        equalTo: "#other_user_email_first"
+                    },
+
+                    "other_user[listOfRoles][]": {
+                        required: true
+                    },            
+                },
+                submitHandler: function(form) {
+                    $(".spinner").show();
+                    form.submit();
+                },
+                error: function() {
+                    $(".spinner").hide();
+                }
+            });   
+
+
+        });
+        
+    </script>
+{% endblock %}

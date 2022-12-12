@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ 'layout.register'|trans}} {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {{ include('UserManagement/_header.html.twig') }}
+    <div class="container">
+        <center><figure style="width: 10rem;"><img src="{{asset('images/core/logo_square.svg')}}" class="cm-logo-img" alt="logo"/></figure></center>
+        <div class="row">
+            <section class="col-lg-8 py-3 lms-login-form">
+                <header>
+                    <h2 class="font-weight-light">{{'register.register_title'|trans}}</h2>
+                </header>
+                {{ include('UserManagement/Registration/register_content.html.twig') }}
+            </section>
+            <section class="col-lg-4 py-3">
+                <div class="jumbotron">
+                    <header>
+                        <h2 class="font-weight-light">{{'register.login_title'|trans}}</h2>
+                    </header>
+                    <p class="lead">{{'register.login_subtitle'|trans}}</p>
+                    <hr class="my-3">
+                    <p class="">{{'register.already_inscrit'|trans}}<br><a href="{{ path('app_login') }}" class="btn btn-primary">{{ 'security.login.submit'|trans }}</a></p>
+                    <hr class="my-3">
+                    <p class="">{{'register.explaination2'|trans}}</p>
+                    <hr class="my-3">
+                    {{ include('home/_cellule_relooke.html.twig') }}
+                    <hr class="my-3">
+                    {{ include('home/_information_medicale_relooke.htm.twig') }}
+                </div>
+            </section>
+        </div>
+    </div>
+
+<input type="hidden" id="app_request_method" value="{{  app.request.method }}">
+<input type="hidden" id="search_rpps" value="{{ path('search_rpps') }}">
+<input type="hidden" id="search_gerant" value="{{ path('search_gerant') }}">
+<input type="hidden" id="search_pharmacien" value="{{ path('search_pharmacien') }}">
+<input type="hidden" id="pharmacien_existed" value="{{ 'message.pharmacien_existed'|trans }}">
+<input type="hidden" id="pharmacien_not_existed" value="{{ 'message.pharmacien_not_existed'|trans  }}">
+<input type="hidden" id="email_existed" value="{{ 'message.email_existed'|trans  }}">
+{% for flashMessage in app.session.flashbag.get('success') %}
+    <input type="hidden" class="flashbagSuccess" value="{{ flashMessage }}">   
+{% endfor %}  
+{% endblock %}
+
+{% block js %}
+<script src="https://www.google.com/recaptcha/api.js"></script>             	
+{% endblock %}

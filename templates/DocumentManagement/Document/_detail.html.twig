@@ -1,0 +1,5 @@
+{% if document is defined and document is not null and document.fileUri is not null %}
+	<div class="col-12 form-group">
+		<embed src="{{ path('admin_private_upload', {'upload': document.fileUri, 'format': 'revues'}) }}" width="100%" height="500px" type='application/pdf'/>
+	</div>	
+{% endif %}

@@ -1,0 +1,71 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'lov.actions.add'|trans }}{% endblock %}
+
+{% block body %}
+ <!-- Fil d'ariane -->
+<div class="cm-breadcrumb">
+    {{ app_name }} > <span class="bold">{{ 'menu.lov.title'|trans}}</span>
+</div>
+
+<!-- Titre -->
+<div class="d-flex align-items-center lms-title">
+    <h1 class="text-uppercase lms-h1">Livraison index</h1>
+    <hr>
+</div>
+
+<!-- Contenu -->    
+<div class="card border-0">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">                  
+                                    
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>DepartAdress</th>
+                            <th>ArriveAdress</th>
+                            <th>DepartHeure</th>
+                            <th>ArriveHeure</th>
+                            <th>Prix</th>
+                            <th>actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for livraison in livraisons %}
+                        <tr>
+                            <td>{{ livraison.id }}</td>
+                            <td>{{ livraison.departAdress }}</td>
+                            <td>{{ livraison.arriveAdress }}</td>
+                            <td>{{ livraison.departHeure ? livraison.departHeure|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ livraison.arriveHeure ? livraison.arriveHeure|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ livraison.prix }}</td>
+                            <td>
+                                <a href="{{ path('transaction_management_livraison_show', {'id': livraison.id}) }}">show</a>
+                                <a href="{{ path('transaction_management_livraison_edit', {'id': livraison.id}) }}">edit</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <a href="{{ path('transaction_management_livraison_new') }}">Create new</a>
+
+            </div>    
+        </div>
+    </div>
+</div>                            
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+    <script>
+    </script> 
+{% endblock %}
+
+

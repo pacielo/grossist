@@ -1,0 +1,85 @@
+
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('admin') }}">
+              <i class="menu-icon mdi mdi-view-dashboard"></i>
+              <span class="menu-title">Tableau de bord</span>
+            </a>
+          </li>
+          
+          <li class="nav-item nav-category">Supply chain</li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('produits') }}">
+              <i class="menu-icon mdi mdi-wallet-giftcard"></i>
+              <span class="menu-title">Boutique</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('product_index') }}">
+              <i class="menu-icon mdi mdi-food"></i>
+              <span class="menu-title">Produits </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('transaction_management_purchase_index') }}">
+              <i class="menu-icon mdi mdi-shopping"></i>
+              <span class="menu-title"> Achats </span>
+            </a>
+          </li>
+          
+          <li class="nav-item nav-category">Transport</li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('transport_management_vehicule_index') }}">
+              <i class="menu-icon mdi mdi-car"></i>
+              <span class="menu-title"> Vehicules </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">
+              <i class="menu-icon  mdi mdi-truck"></i>
+              <span class="menu-title"> Livraisons </span>
+            </a>
+          </li>
+
+          {# <li class="nav-item nav-category">Agriculture</li>
+          <li class="nav-item">
+            <a class="nav-link" href="#auth" >
+            </a>
+          </li> #}
+          <li class="nav-item" style="">
+            <a class="nav-link" href="{{ path('admin_users_index_other_roles') }}">
+              <i class="menu-icon mdi mdi-car"></i>
+              <span class="menu-title"> {{ 'menu.user.management' | trans }} </span>
+            </a>
+          </li>
+
+          <li class="nav-item nav-category">Autres</li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('admin_document_index') }}">
+              <i class="menu-icon mdi mdi-file-pdf"></i>
+              <span class="menu-title"> {{ 'menu.document.titlegestion' | trans }} </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('admin_lov_list') }}">
+              <i class="menu-icon mdi mdi-view-list"></i>
+              <span class="menu-title"> {{ 'menu.lov.title' | trans }}</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('admin_audit_list') }}">
+              <i class="menu-icon mdi mdi-file-find"></i>
+              <span class="menu-title"> {{ 'menu.audit.title' | trans }} </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('admin_tracking_list') }}">
+              <i class="menu-icon mdi mdi-history"></i>
+              <span class="menu-title"> {{ 'menu.tracking.title' | trans }} </span>
+            </a>
+          </li>
+
+        </ul>
+      </nav>

@@ -1,0 +1,11 @@
+<div class="card full-xs mb-3">
+    <h5 class="card-header">{{ 'lov.menu'|trans}}</h5>
+    <div class="card-body">
+		<a href="{{ path('admin_lov_list', {'entity': 'GenreCommerce' }) }}" 
+		class="btn btn-sm {% if entity == "GenreCommerce" %}btn-primary{% else %}btn-outline-primary{% endif %} mt-2">{{ 'lov.genrecommerce'|trans }} </a>
+
+		<a href="{{ path('admin_lov_list', {'entity': 'TypeCommerce' }) }}" 
+		class="btn btn-sm {% if entity == "TypeCommerce" %}btn-primary{% else %}btn-outline-primary{% endif %} mt-2">{{ 'lov.typecommerce'|trans }} </a>
+
+	</div>
+</div>

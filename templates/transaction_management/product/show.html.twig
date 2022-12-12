@@ -1,0 +1,58 @@
+{% extends 'admin_base2.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block nav %}
+  {% include "navfront.html.twig" %}
+{% endblock %}
+
+{% block body %}
+
+<div class="container-scroller"> 
+  <div class="container-fluid page-body-wrapper">
+      <!-- MENU -->
+    {% include "menu.html.twig" %}
+      <!-- FIN MENU -->
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+                <div class="row mt-3 mb-4">
+                    <div class="col-sm-4">
+                        <img src="https://via.placeholder.com/600x400" alt="{{ product.name }}" class="img-fluid">
+                    </div>
+                    <div class="col-sm-8">
+                        <h1 class="mt-4 mt-sm-0">{{ product.name }}</h1>
+                        <h2>{{ product.price }} €</h2>
+                        <hr>
+                        <b>Description: </b>{{ product.description }}
+                        {{ form_start(form, {'attr': {'class': 'mt-4 p-4 bg-light'}}) }}
+                        <div class="form-group">
+                            {{ form_label(form.quantity) }}
+                            {{ form_widget(form.quantity, {
+                                'attr': {
+                                    'class': 'form-control ' ~ (form.quantity.vars.valid ? '' : 'is-invalid')
+                                }
+                            }) }}
+                            <div class="invalid-feedback">
+                                {{ form_errors(form.quantity) }}
+                            </div>
+                        </div>
+                        {{ form_widget(form.add, {'attr': {'class': 'btn btn-warning w-25'}}) }}
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+        </div>
+      </div>
+      <!-- main-panel ends -->
+  </div>
+</div>
+
+{% endblock %}
+{% block js %}
+    {{ parent() }}
+
+{% endblock %}
+
+

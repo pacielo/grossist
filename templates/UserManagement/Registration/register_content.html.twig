@@ -1,0 +1,51 @@
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+    
+{{ form_start(form) }}
+
+    <p class="lead">{{ 'register.register_subtitle'|trans }}</p>
+
+    {{ include('UserManagement/_flash.html.twig') }}
+    <p class="font-italic text-danger">{{ 'register.register_subtitle_oblig'|trans }}</p> 
+    <div class="cm-registration-form">
+        {{ form_errors(form) }}
+        <div class="row">
+            <div class="col-lg-6 py-3">		
+                {{ form_row(form.grossiste) }}
+                {{ form_row(form.civility) }}	
+                {{ form_row(form.firstname) }}	
+                {{ form_row(form.rppsNumber) }}
+            </div>
+            <div class="col py-3">			
+                {{ form_row(form.service) }}
+                {{ form_row(form.lastname) }}				
+                {{ form_row(form.tel) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 py-3">
+                
+                {{ form_row(form.email) }}
+            </div>
+            <div class="col-lg-6 py-3">					
+                {{ form_row(form.password) }}
+            </div>
+        </div>
+
+		<div class="row">
+            <div class="col-lg-6 py-3">
+                {{ form_row(form.hasAcceptedCGU) }}
+            </div>
+            <div class="col-lg-6 py-3">					
+                 <a target="_blank" href="{{asset('docs/charte_utilisation.pdf')}}">{{"global.cgu2"|trans}}</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="g-recaptcha" data-sitekey="{{ captchakey }}"></div>
+    
+    <button type="submit" name="_submit" class="btn btn-primary mt-3">
+        {{ 'layout.register'|trans}}
+    </button>
+
+{{ form_end(form) }} 

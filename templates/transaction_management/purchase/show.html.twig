@@ -1,0 +1,81 @@
+{% extends 'admin_base2.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="{{ asset('assets/vendors/select2/select2.min.css')}}">
+  <link rel="stylesheet" href="{{ asset('assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css')}}">
+    <style>
+        #tablefiltre_length, #tablefiltre_filter {display: inline-block; width: 50%;}
+    </style>
+{% endblock %}
+
+{% block nav %}
+  {% include "navfront.html.twig" %}
+{% endblock %}
+
+{% block body %}
+
+<div class="container-scroller"> 
+    <!-- partial:partials/_navbar.html -->    
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- MENU -->
+        {% include "menu.html.twig" %}
+      <!-- FIN MENU -->
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+
+            <div class="row mt-3 ">   
+<div class="col-md-12">                  
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ purchase.id }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <a href="{{ path('transaction_management_purchase_index') }}">back to list</a>
+
+                <a href="{{ path('transaction_management_purchase_edit', {'id': purchase.id}) }}">edit</a>
+
+                {{ include('transaction_management/purchase/_delete_form.html.twig') }}
+
+            </div> 
+            </div> 
+
+        </div>
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+
+{% endblock %}
+{% block js %}
+    {{ parent() }}
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="{{asset('assets/vendors/typeahead.js/typeahead.bundle.min.js') }}"></script>
+  <script src="{{asset('assets/vendors/select2/select2.min.js') }}"></script>
+  <script src="{{asset('assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
+  <!-- End plugin js for this page -->
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="{{asset('assets/js/file-upload.js') }}"></script>
+  <script src="{{asset('assets/js/typeahead.js') }}"></script>
+  <script src="{{asset('assets/js/select2.js') }}"></script>
+  <!-- End custom js for this page-->
+
+    <script>
+
+    </script> 
+{% endblock %}
+
+
+
+
+

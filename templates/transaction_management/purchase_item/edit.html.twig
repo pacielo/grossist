@@ -1,0 +1,39 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'lov.actions.add'|trans }}{% endblock %}
+
+{% block body %}
+ <!-- Fil d'ariane -->
+<div class="cm-breadcrumb">
+    {{ app_name }} > <span class="bold">{{ 'menu.lov.title'|trans}}</span>
+</div>
+
+<!-- Titre -->
+<div class="d-flex align-items-center lms-title">
+    <h1 class="text-uppercase lms-h1">PurchaseItem index</h1>
+    <hr>
+</div>
+
+<!-- Contenu -->    
+<div class="card border-0">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">                  
+                           
+			    {{ include('transaction_management/purchase_item/_form.html.twig', {'button_label': 'Update'}) }}
+
+			    <a href="{{ path('transaction_management_purchase_item_index') }}">back to list</a>
+
+			    {{ include('transaction_management/purchase_item/_delete_form.html.twig') }}
+
+            </div>    
+        </div>
+    </div>
+</div>                            
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+    <script>
+    </script> 
+{% endblock %}

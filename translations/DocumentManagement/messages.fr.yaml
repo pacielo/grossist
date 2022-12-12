@@ -1,0 +1,25 @@
+document:
+    title: Titre du document
+    file: Fichier
+    folder: Dossier
+    version: Version en vigueur
+    lastUpdate: Date de dernière modification
+    action: Actions
+    actions: 
+        view: Visualiser
+        preview: Prévisualisation
+        nopreview: Pas de prévisualisation possible pour les fichiers 
+        edit: Editer
+        enable: Activer
+        disable: Désactiver
+        add: Nouveau document
+        save: Enregistrer
+        cancel: Annuler
+        download: Télécharger
+        fichier: Ouvrir le fichier justificatif
+        nodoc: Il n'y pas encore de document consultable.
+    flash:
+        created: "Un document a été créé."
+        updated: "Le document a été mis à jour."
+        disable: "Le document a été désactivé."
+        enable: "Le document a été activé."

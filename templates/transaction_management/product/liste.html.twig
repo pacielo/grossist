@@ -1,0 +1,166 @@
+{% extends 'admin_base2.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="{{ asset('assets/vendors/select2/select2.min.css')}}">
+  <link rel="stylesheet" href="{{ asset('assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css')}}">
+    <style>
+        #tablefiltre_length, #tablefiltre_filter {display: inline-block; width: 50%;}
+    </style>
+{% endblock %}
+
+{% block nav %}
+  {# {% include "nav.html.twig" %} #}
+  {% include "navfront.html.twig" %}
+{% endblock %}
+
+{% block body %}
+
+<div class="container-scroller"> 
+    <!-- partial:partials/_navbar.html -->    
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- MENU -->
+        {% include "menu.html.twig" %}
+      <!-- FIN MENU -->
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-sm-12 col-lg-12 ">
+              <div class="home-tab">
+                <!-- MENU HORIZONTAL -->
+                <div class="d-sm-flex align-items-center justify-content-between border-bottom">
+                  <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link " id="home-tab" href="{{ path('produits', {'cat': ""}) }}" role="tab" >Tout les produits</a>
+                    </li>
+                    {% for cat in categories %}
+                      <li class="nav-item">
+                        <a class="nav-link" id="home-tab" href="{{ path('produits', {'cat': cat.id }) }}" > {{cat.title}} </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+                <!-- FIN MENU HORIZONTAL -->
+              </div>
+            </div>              
+                            
+
+                    <div class="row mt-3">
+                      {% if cat %}
+                          <form action="{{ path('produits', {'cat': cat.id}) }}" method="POST">
+                      {% else %}
+                          <form action="{{ path('produits')}}" method="POST">
+                      {% endif %}
+                      <div class="col-sm-11 ">
+                        <div class="form-group">
+                          <div class="input-group">
+                              <input type="text" name="recherche" class="form-control form-control-lg">
+                              <div class="input-group-append">
+                                <button type="submit" class="input-group-text bg-primary text-white form-control-lg">Rechercher</button>
+                              </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+
+                      <div class="card border-0 card-body col-sm-12 col-lg-12"> 
+                        <div class="row">
+                            {% for product in products %}
+                                <div class="col-sm-3">
+                                    <div class="card mb-4">
+                                        <img src="https://via.placeholder.com/200x150" alt="{{ product.name }}" class="card-img-top">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ product.name }}</h5>
+                                            <p class="card-text">{{ product.description }}</p>
+                                            <div class="d-flex justify-content-between align-item-center">
+                                                <a href="{{ path('transaction_management_product_show', {'id': product.id}) }}" class="btn btn-dark">View details</a>
+                                                <span class="h5 mt-auto">{{ product.price }} €</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  </div>
+                            {% endfor %}
+                        </div>
+
+                      </div>
+                    </div> 
+
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+
+{% endblock %}
+{% block js %}
+    {{ parent() }}
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="{{asset('assets/vendors/typeahead.js/typeahead.bundle.min.js') }}"></script>
+  <script src="{{asset('assets/vendors/select2/select2.min.js') }}"></script>
+  <script src="{{asset('assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
+  <!-- End plugin js for this page -->
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="{{asset('assets/js/file-upload.js') }}"></script>
+  <script src="{{asset('assets/js/typeahead.js') }}"></script>
+  <script src="{{asset('assets/js/select2.js') }}"></script>
+  <!-- End custom js for this page-->
+
+    <script>
+        $(function () {
+             //=======================================table===========================================
+             $('#filtreForm th').each( function () {
+                var title = $(this).text();
+                $(this).html( '<input type="text" class="form-control" placeholder="{{"global.table.search"|trans}} '+title+'" />' );
+            } );
+
+            var table = $('#tablefiltre').DataTable({
+                colReorder: true,
+                responsive: false, 
+                ordering:  true, 
+                order: [[ 0, "asc" ]],
+                searching: true,
+                paging: true,
+                language: {
+                    decimal:        "",
+                    emptyTable:     "-",
+                    info: "[_START_/_END_]  <b>{{"global.table.total"|trans}} : </b>_TOTAL_",
+                    infoEmpty:      "0/0   [0]",
+                    infoFiltered:   "({{"global.table.filteredForm"|trans}} _MAX_ {{"global.table.entries"|trans}})",
+                    infoPostFix:    "",
+                    thousands:      " ",
+                    lengthMenu:     "<b>{{"global.table.Entries"|trans}}</b> _MENU_",
+                    loadingRecords: "{{"global.table.loadingRecords"|trans}}...",
+                    processing:     "{{"global.table.processing"|trans}}...",
+                    search:         "<b>{{"global.table.search"|trans}}</b>:",
+                    zeroRecords:    "{{"global.table.zeroRecords"|trans}}",
+                    paginate: {next:       ">>", previous:   "<<"},
+                    
+                },
+            });
+            
+            table.columns().eq( 0 ).each( function ( colIdx ) {
+                $( 'input', $('#filtreForm th')[colIdx] ).on( 'keyup change', function () {
+                    table
+                        .column( colIdx )
+                        .search( this.value )
+                        .draw();
+                } );
+            } );
+            //=======================================table end=========================================
+            
+        });
+
+    </script> 
+{% endblock %}
+
+

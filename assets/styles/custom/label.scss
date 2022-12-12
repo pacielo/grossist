@@ -1,0 +1,12 @@
+label {
+    &.asterisque {
+        &:after {
+            content: ' *';
+            color: black;
+        }
+    }
+    &.error {
+        font-size: small;
+        color: $cinnabar-red;
+    }
+}
